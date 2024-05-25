@@ -1,7 +1,11 @@
 <div class="container">
    
    <div *ngFor="let item of ListBlock">
-        <h2>{{item.data.text}}</h2>
+     
+        <h2 *ngIf=" item.type=='header'" [innerHTML]="item.data.text"></h2>
+
+        <span *ngIf=" item.type=='paragraph'" [innerHTML]="item.data.text"></span>
+        
         <br>
         <div *ngIf="item.type=='image'">
             <img [src]="item.data.file.url">
