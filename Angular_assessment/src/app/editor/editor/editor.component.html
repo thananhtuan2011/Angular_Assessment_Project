@@ -1,24 +1,6 @@
-<div class="container mg">
-    <div class="form-group">
-        <input
-        [(ngModel)]="title"
-          class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-          type="text"
-          name="title"
-          placeholder="My articel title"
-          autocomplete="off"
-        
-        />
-  
-      </div>
-      <div  class="content_body">
-        <quill-editor placeholder="Content"   [modules]="quillConfig"  [(ngModel)]="content">
-        </quill-editor>
-      </div>
-<div class="btn">
-    <button (click)="Publish()"> Publish</button>
 
-</div>
+<div #editor></div>
 
-     
+<div class="container btn">
+  <button type="button" (click)="showEditorData()">Publish</button>
 </div>

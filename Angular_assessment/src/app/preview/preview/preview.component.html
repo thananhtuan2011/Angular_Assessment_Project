@@ -1,16 +1,34 @@
 <div class="container">
    
-    <!-- <div *ngFor="let item of PostDetail">
-        <h2>{{item.title}}</h2>
+   <div *ngFor="let item of ListBlock">
+        <h2>{{item.data.text}}</h2>
         <br>
-        <span  [innerHTML]="item.content"></span>
-    </div> -->
+        <div *ngIf="item.type=='image'">
+            <img [src]="item.data.file.url">
+<br>
+            <span>{{item.data.caption}}</span>
+        </div>
+        <div *ngIf="item.type=='video'">
+            <video  controls>
 
-     <div >
+                <source [src]="item.data.url" type="video/mp4">
+            </video>
+<br>
+        </div>
+        <div *ngIf="item.type=='linkTool'">
+          <a href="{{item.data.link}}">{{item.data.link}}</a>
+<br>
+        </div>
+
+        
+        
+    </div> 
+
+     <!-- <div >
         <h2>{{title}}</h2>
         <br>
         <span  [innerHTML]="content"></span>
-    </div>
+    </div> -->
 
     <div class="btn">
         <button (click)="_Back()">Back</button>

@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 })
 export class PreviewComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
-  title!: string;
-  content!: SafeHtml
+  ListBlock: any[] = [];
   constructor(private router: Router, private _rxjs_service: RxjsServiceService, private sanitizer: DomSanitizer) {
 
 
@@ -29,12 +28,14 @@ export class PreviewComponent implements OnInit, OnDestroy {
   }
   LoadData() {
     const sb = this._rxjs_service._share_data$.subscribe(res => {
+      console.log("rressss", res)
       if (res) {
-        res.forEach(el => {
-          this.title = el.title,
-            this.content = el.content == null ? "" : this.sanitizer.bypassSecurityTrustHtml(el.content);
-        }
-        )
+        this.ListBlock = res.blocks
+        // res.forEach(el => {
+        //   this.title = el.title,
+        //     this.content = el.content == null ? "" : this.sanitizer.bypassSecurityTrustHtml(el.content);
+        // }
+        // )
       }
     }
     )

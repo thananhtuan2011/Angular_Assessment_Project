@@ -7,12 +7,12 @@ import { Post } from '../Post.interface';
 })
 export class RxjsServiceService {
 
-  private readonly _share_data = new BehaviorSubject<Post[]>([]);
+  private readonly _share_data = new BehaviorSubject<any>(undefined);
   readonly _share_data$ = this._share_data.asObservable();
-  get EventData(): Post[] {
+  get EventData(): any {
     return this._share_data.getValue();
   }
-  set EventData(val: Post[]) {
+  set EventData(val: any) {
     this._share_data.next(val);
   }
   constructor() { }
