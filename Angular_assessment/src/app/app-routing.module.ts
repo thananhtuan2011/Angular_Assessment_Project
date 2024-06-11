@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditorComponent } from './editor/editor/editor.component';
-import { PreviewComponent } from './preview/preview/preview.component';
+import { BudgetComponent } from './budget/budget/budget.component';
 
 const routes: Routes = [
+
   {
-    path: 'editor',
-    component: EditorComponent
+    path: 'budget',
+    component: BudgetComponent
   },
-  {
-    path: 'article/preview',
-    component: PreviewComponent
-  },
+
   {
     path: '',
-    redirectTo: '/editor',
+    redirectTo: '/budget',
     pathMatch: 'full',
   },
 ];

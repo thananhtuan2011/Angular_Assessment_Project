@@ -3,22 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditorComponent } from './editor/editor/editor.component';
-import { QuillModule } from 'ngx-quill';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PreviewComponent } from './preview/preview/preview.component';
+import { BudgetComponent } from './budget/budget/budget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditorComponent,
-    PreviewComponent
+    BudgetComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    QuillModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],

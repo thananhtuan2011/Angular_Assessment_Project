@@ -1,0 +1,92 @@
+<div style="margin: 2%;">
+    <h2>Budget Builder</h2>
+    <div style="margin-bottom: 10px;">
+      <label for="startMonth">Start Month:</label>
+      <input type="month" id="startMonth" [(ngModel)]="startMonth" (change)="updateMonths()">
+      <label for="endMonth">End Month:</label>
+      <input type="month" id="endMonth" [(ngModel)]="endMonth" (change)="updateMonths()">
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th *ngFor="let month of months">{{ month }}</th>
+          <!-- <th>Subtotal</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>
+                <h4>Income</h4>
+            </td>
+        </tr>
+        <tr *ngFor="let item of budgetItems; let i = index">
+          <td contenteditable="true"  *ngIf="months.length>0"  (contextmenu)="openContextDelete($event, i, '')">
+              <!-- <span class="delete"> X</span> -->
+            {{ item.category }}
+          
+          </td>
+          <td *ngFor="let month of months; let j = index">
+            <input type="number" [(ngModel)]="item.values[month]" 
+                   (input)="updateTotals()" 
+                   (keydown.tab)="checkAddNewLine(i, j, $event)" 
+                   (contextmenu)="openContextMenu($event, item, month)">
+          </td>
+          <!-- <td>{{ getSubtotal(item) }}</td> -->
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Income Total</td>
+          <td style="font-weight: bold;"  *ngFor="let month of months">{{ getTotal(month) }}</td>
+        </tr>
+        <tr>
+          <td><h4> Express</h4>
+          </td>
+      </tr>
+      <tr  *ngFor="let item of budgetItems_expenses; let i = index">
+        <td     contenteditable="true" (contextmenu)="openContextDelete_Expenses($event, i, '')" >{{ item.category }}</td>
+        <td *ngFor="let month of months; let j = index">
+          <input type="number" [(ngModel)]="item.values[month]" 
+                 (input)="updateTotals_expenses()" 
+                 (keydown.tab)="checkAddNewLine_expenses(i, j, $event)" 
+                 (contextmenu)="openContextMenu($event, item, month)">
+        </td>
+        <!-- <td>{{ getSubtotal(item) }}</td> -->
+      </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="title"  >Total Expenses</td>
+          <td  *ngFor="let month of months">{{ getTotal_expenses(month) }}</td>
+        </tr>
+        <tr>
+          <td class="title" >Profit / Loss</td>
+          <td  *ngFor="let month of months">{{ getProfitLoss(month)}}</td>
+        </tr>
+        <tr>
+          <td class="title" >Opening Balance</td>
+          <td  *ngFor="let month of months">{{ getOpeningBalance(month) }}</td>
+        </tr>
+        <tr>
+          <td class="title" >Closing Balance</td>
+          <td  *ngFor="let month of months">{{ getOpeningBalance_Expenses(month) }}</td>
+        </tr>
+       
+      </tfoot>
+
+ 
+    </table>
+    
+    <div class="context-menu" *ngIf="contextMenuVisible" [style.top]="contextMenuPosition.y" [style.left]="contextMenuPosition.x">
+      <button (click)="applyToAll(contextMenuItem, contextMenuMonth)">Apply to all</button>
+    </div>
+
+    <div class="context-menu" *ngIf="contextMenuVisible_Delete" [style.top]="contextMenuPosition_Delete.y" [style.left]="contextMenuPosition_Delete.x">
+      <button (click)="Delete()">Delete Cell</button>
+    </div>
+    <div class="context-menu" *ngIf="contextMenuVisible_Delete_Expenses" [style.top]="contextMenuPosition_Delete_Expenese.y" [style.left]="contextMenuPosition_Delete_Expenese.x">
+      <button (click)="Delete_Expenses()">Delete Cell Expenses</button>
+    </div>
+    
+  </div>
+  
